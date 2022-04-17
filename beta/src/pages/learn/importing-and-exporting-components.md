@@ -1,26 +1,26 @@
 ---
-title: Importing and Exporting Components
+title: Importar y exportar componentes
 ---
 
 <Intro>
 
-The magic of components lies in their reusability: you can create components that are composed of other components. But as you nest more and more components, it often makes sense to start splitting them into different files. This lets you keep your files easy to scan and reuse components in more places.
+La magia de los componentes reside en su reusabilidad: puedes crear componentes que se componen a su vez de otros componentes. Pero mientras anidas más y más componentes, a menudo tiene sentido comenzar a separarlos en diferentes archivos. Esto te permite que tus archivos se mantengan fáciles de buscar/scan????? y reutilizar componentes en más lugares.
 
 </Intro>
 
 <YouWillLearn>
 
-* What a root component file is
-* How to import and export a component
-* When to use default and named imports and exports
-* How to import and export multiple components from one file
-* How to split components into multiple files
+* Qué es un archivo de componente raíz
+* Cómo importar y exportar un componente
+* Cuándo usar imports y exports *defaults* o nombrados
+* Cómo importar o exportar múltiples componentes de un archivo
+* Cómo separar componentes en múltiples archivos
 
 </YouWillLearn>
 
-## The root component file {/*the-root-component-file*/}
+## El archivo de componente raíz {/*the-root-component-file*/}
 
-In [Your First Component](/learn/your-first-component), you made a `Profile` component and a `Gallery` component that renders it:
+En [Tu primer componente](/learn/your-first-component), hiciste un componente `Profile` y un componente `Gallery` que lo renderiza:
 
 <Sandpack>
 
@@ -52,17 +52,17 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 </Sandpack>
 
-These currently live in a **root component file,** named `App.js` in this example. In [Create React App](https://create-react-app.dev/), your app lives in `src/App.js`. Depending on your setup, your root component could be in another file, though. If you use a framework with file-based routing, such as Next.js, your root component will be different for every page.
+Estos viven actualmente en este ejemplo en un **archivo de componente raíz,** llamado `App.js`. En [Create React App](https://create-react-app.dev/), tu aplicación vive en `src/App.js`. No obstante, en dependencia de tu configuración, tu componente raíz podría estar en otro archivo. Si utilizas un framework con enrutamiento basado en archivos, como Next.js, tu componente raíz será diferente para cada página.
 
-## Exporting and importing a component {/*exporting-and-importing-a-component*/}
+## Exportar e importar un componente {/*exporting-and-importing-a-component*/}
 
-What if you want to change the landing screen in the future and put a list of science books there? Or place all the profiles somewhere else? It makes sense to move `Gallery` and `Profile` out of the root component file. This will make them more modular and reusable in other files. You can move a component in three steps:
+¿Y si quisieras cambiar la pantalla de inicio en el futuro y poner allí una lista de libros científicos? ¿O ubicar todos los perfiles en otro lugar? Tiene sentido mover `Gallery` y `Profile` fuera del componente raíz. Esto los haría más modulares y reutilizables en otros archivos. Puedes mover un componente en tres pasos:
 
-1. **Make** a new JS file to put the components in.
-2. **Export** your function component from that file (using either [default](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/export#using_the_default_export) or [named](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/export#using_named_exports) exports).
-3. **Import** it in the file where you’ll use the component (using the corresponding technique for importing [default](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/import#importing_defaults) or [named](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/import#import_a_single_export_from_a_module) exports).
+1. **Crea** un nuevo archivo JS para poner los componentes dentro.
+2. **Exporta** tu componente de función desde ese archivo (ya sea usando exports [por defecto](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/export#usando_el_export_por_defecto) o [con nombre](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/export#syntax)).
+3. **Impórtalo** en el archivo en el que usarás el componente (usando la técnica correspondiente de importar exports [por defecto](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/import#importaci%C3%B3n_de_elementos_por_defecto) o [con nombre](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/import#importa_un_solo_miembro_de_un_m%C3%B3dulo.)).
 
-Here both `Profile` and `Gallery` have been moved out of `App.js` into a new file called `Gallery.js`. Now you can change `App.js` to import `Gallery` from `Gallery.js`:
+Aquí tanto `Profile` y `Gallery` se han movido fuera de `App.js` en un nuevo archivo llamado `Gallery.js`. Ahora puedes cambiar `App.js` para importar `Gallery` desde `Gallery.js`:
 
 <Sandpack>
 
@@ -104,25 +104,25 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 </Sandpack>
 
-Notice how this example is broken down into two component files now:
+Nota cómo este ejemplo está ahora descompuesto en dos archivos:
 
 1. `Gallery.js`:
-     - Defines the `Profile` component which is only used within the same file and is not exported.
-     - Exports the `Gallery` component as a **default export**.
+     - Define el componente `Profile` que se usa solo dentro del mismo archivo y no se exporta.
+     - Define el componente `Gallery` como un *export por defecto*.
 2. `App.js`:
-     - Imports `Gallery` as a **default import** from `Gallery.js`.
-     - Exports the root `App` component as a **default export**.
+     - Importa `Gallery` como un **import por defecto** desde `Gallery.js`.
+     - Exporta el componente raíz `App` como un **export por defecto**.
 
 
 <Note>
 
-You may encounter files that leave off the `.js` file extension like so:
+Puede que te encuentres archivos que omiten la extensión de archivo `.js` de esta forma:
 
 ```js 
 import Gallery from './Gallery';
 ```
 
-Either `'./Gallery.js'` or `'./Gallery'` will work with React, though the former is closer to how [native ES Modules](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules) work.
+Tanto `'./Gallery.js'` como `'./Gallery'` funcionarán con React, aunque la primera forma es más cercana a cómo lo hacen los [módulos nativos de ES](https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Modules).
 
 </Note>
 
